@@ -26,11 +26,10 @@ public class MyMario implements Runnable {
     public void run() {
         //控制速度 控制图片变量img 此线程并不直接参与画
         while (true){
+
+            boolean onObstacle = false;
             boolean rightGo = true;
             boolean leftGo = true;
-            boolean onObstacle = false;
-
-
 //遍历场景内所有障碍物
             for (int i =0;i<mb.getObs().size();i++){
                 Obstacles ob =  mb.getObs().get(i);
@@ -38,23 +37,22 @@ public class MyMario implements Runnable {
                 if(ob.getY()==this.y+60&&(ob.getX()>this.x-60&&ob.getX()<this.x+60)){
                     onObstacle=true;
                 }
-
                 //顶到障碍物
                 if(ob.getY()>=this.y-60&&ob.getY()<=this.y-60&&(ob.getX()-this.x>60&&ob.getX()<this.x+60)){
-                    if (ob.getType()==0){
-                        mb.getObs().remove(ob);
                         this.uptime=0;
-                    }
                 }
                 //是否可以向右走
-                if(ob.getX()==this.x+55&&(ob.getY()>this.y-60&&ob.getY()<this.y+25)){
+                if(ob.getX()==this.x+60&&(ob.getY()>this.y-60&&ob.getY()<this.y+60)){
                     rightGo=false;
                 }
-
-                if(ob.getX()==this.x-60&&(ob.getY()>this.y-60&&ob.getY()<this.y-60)){
+                //是否可以向左走
+                if(ob.getX()==this.x-60&&(ob.getY()>this.y-60&&ob.getY()<this.y+60)){
                     leftGo=false;
                 }
-
+                //底部碰撞
+                if(ob.getY()==this.y-60 && (ob.getX()+60>this.x && ob.getX()-60<this.x)){
+                    uptime=0;
+                }
             }
             //检测是否在障碍物上
             if (uptime==0&&onObstacle){
@@ -151,14 +149,14 @@ public class MyMario implements Runnable {
     }
 
     public void jump(){
-        if(status.startsWith("jump")){
+        //if(status.startsWith("jump")){
             if(status.contains("left")){
                 status="jump-left";
             }else
                 status="jump-right";
             Yspeed=-10; //向上跳跃y值减少
-            uptime=7; //跳跃高度
-        }
+            uptime=8; //跳跃高度
+        //}
     }
 
     public void fall(){

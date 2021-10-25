@@ -9,9 +9,9 @@ public class MyBackground {
     private int order ;
     boolean flag=true ;
     private List<Obstacles> obs = new ArrayList<>();
+    private List<Monster> mst = new ArrayList<>();
 
     public MyBackground(){
-
     }
     public MyBackground(int order,boolean flag, BufferedImage img){
         this.order=order;
@@ -37,7 +37,11 @@ public class MyBackground {
                     obs.add(new Obstacles(i,300,4,this));
                 }
             }
-            obs.add(new Obstacles(700,450,8,this));
+            obs.add(new Obstacles(720,410,8,this));
+            obs.add(new Obstacles(780,410,7,this));
+            obs.add(new Obstacles(720,470,6,this));
+            obs.add(new Obstacles(780,470,5,this));
+            mst.add(new Monster(760,350,"flower",this));
         }
 
         }
@@ -53,6 +57,8 @@ public class MyBackground {
     public boolean isFlag() {
         return flag;
     }
+
+    public List<Monster> getMst(){return mst;}
 
     public List<Obstacles> getObs() {
         return obs;

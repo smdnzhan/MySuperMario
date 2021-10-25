@@ -21,9 +21,8 @@ public class GameFrame extends JFrame implements Runnable,KeyListener {
     public static void main(String[] args) {
         GameFrame gf = new GameFrame();
     }
-    private MyMario mm=new MyMario();
+    private MyMario mm;
     private Thread t=new Thread(this);
-
 
     public GameFrame(){
         this.setTitle("玛丽奥");
@@ -64,6 +63,11 @@ public class GameFrame extends JFrame implements Runnable,KeyListener {
         while(iter.hasNext()){
             Obstacles ob = iter.next();
             gg.drawImage(ob.getImg(),ob.getX(),ob.getY(),null);
+        }
+        Iterator<Monster> iter2 =bg.getMst().iterator();
+        while (iter2.hasNext()){
+            Monster m = iter2.next();
+            gg.drawImage(m.getImg(),m.getX(),m.getY(),null);
         }
         gg.drawImage(mm.getImg(),mm.getX(),mm.getY(),null);
         g.drawImage(offscreen,0,0,null);
