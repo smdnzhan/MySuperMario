@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Monster implements Runnable {
 
-    private int x, y;
+    private int x, y,xspeed,yspeed;
     private String type;
     private BufferedImage img;
     private MyBackground mb;
@@ -17,10 +17,18 @@ public class Monster implements Runnable {
         t.start();
     }
 
-    public void monsterRun(){
+    public void monsterRun() throws InterruptedException {
         if (type.equals("flower")){
             index = index==0?1:0;
             this.img=MyStaticValue.allFlowerImage.get(index);
+            if (this.y <=350 ){ //在上极限位置 向下移动
+                yspeed=3;
+
+            }if (this.y>=410){
+                yspeed=-3;
+            }
+            y+=yspeed;
+            Thread.sleep(50);
         }
         if (this.type.equals("triangle")){ //暂定
             this.img=MyStaticValue.allTriangleImage.get(0);
@@ -73,7 +81,11 @@ public class Monster implements Runnable {
     @Override
     public void run() {
         while (true){
-            monsterRun();
+            try {
+                monsterRun();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

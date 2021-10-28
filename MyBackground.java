@@ -29,6 +29,7 @@ public class MyBackground {
                     obs.add(new Obstacles(j*60,650-i,10,this));
                 }
             }
+
             //障碍物
             for (int i =300;i<=600;i+=60){
                 if (i==300||i==420||i==540||i==600){ //普通砖块
@@ -37,11 +38,12 @@ public class MyBackground {
                     obs.add(new Obstacles(i,300,4,this));
                 }
             }
+            mst.add(new Monster(760,350,"flower",this));
             obs.add(new Obstacles(720,410,8,this));
             obs.add(new Obstacles(780,410,7,this));
             obs.add(new Obstacles(720,470,6,this));
             obs.add(new Obstacles(780,470,5,this));
-            mst.add(new Monster(760,350,"flower",this));
+
         }
 
         }

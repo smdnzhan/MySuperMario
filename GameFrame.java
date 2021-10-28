@@ -59,15 +59,16 @@ public class GameFrame extends JFrame implements Runnable,KeyListener {
         Graphics gg = offscreen.getGraphics();
 
         gg.drawImage(bg.getShowingImage().getScaledInstance(1200,800,1),0,0,null);
-        Iterator<Obstacles> iter =bg.getObs().iterator();
-        while(iter.hasNext()){
-            Obstacles ob = iter.next();
-            gg.drawImage(ob.getImg(),ob.getX(),ob.getY(),null);
-        }
+
         Iterator<Monster> iter2 =bg.getMst().iterator();
         while (iter2.hasNext()){
             Monster m = iter2.next();
             gg.drawImage(m.getImg(),m.getX(),m.getY(),null);
+        }
+        Iterator<Obstacles> iter =bg.getObs().iterator();
+        while(iter.hasNext()){
+            Obstacles ob = iter.next();
+            gg.drawImage(ob.getImg(),ob.getX(),ob.getY(),null);
         }
         gg.drawImage(mm.getImg(),mm.getX(),mm.getY(),null);
         g.drawImage(offscreen,0,0,null);
@@ -88,7 +89,6 @@ public class GameFrame extends JFrame implements Runnable,KeyListener {
         }
         if (e.getKeyCode()==38){
             mm.jump();
-            System.out.println("跳跃！");
         }
     }
 
